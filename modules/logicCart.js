@@ -102,3 +102,9 @@ export const getTotalCart = async () => {
     }
     return 0;
 }
+
+export const buyNow = (total) => {
+    if (total > 0) {
+        swalAlert({ type: "success", title: "Comprado con exito", time: "2000" });
+    }
+}

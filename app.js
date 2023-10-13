@@ -1,6 +1,6 @@
 import { loadCoats, loadShirts, loadPants } from "./modules/loadProducts.js"
 import { loadCart } from "./modules/loadCart.js";
-import { addElementClicked, deleteOneCart, deleteAllCart, editQuantity, getTotalCart } from "./modules/logicCart.js";
+import { addElementClicked, deleteOneCart, deleteAllCart, editQuantity, getTotalCart, buyNow } from "./modules/logicCart.js";
 
 const d = document;
 const $ = (e) => d.querySelector(e);
@@ -54,6 +54,12 @@ export const app = async () => {
         }
 
         if (e.target.matches("button[data-all")) {
+            await deleteAllCart();
+        }
+
+        if (e.target.matches("#buy-now")) {
+            let total = await getTotalCart();
+            buyNow(total);
             await deleteAllCart();
         }
     })
