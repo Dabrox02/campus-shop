@@ -14,8 +14,6 @@ export const loadCart = async (grid) => {
         return { ...e, product };
     }))
 
-    console.log(cartAll);
-
     cartAll.forEach((cart) => {
         grid.insertAdjacentHTML("beforeend", /*html*/`
         <product-cart-component img="${cart.product.imagen}" nameProduct="${cart.product.nombre}" quantity="${cart.cantidad}" price="${cart.product.precio}" idBtn="${cart.id}"></product-cart-component>
