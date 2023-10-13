@@ -10,12 +10,3 @@ export const isURL = (url) => {
     var regex = /^(https?|https):\/\/[^\s/$.?#].[^\s]*$/i;
     return regex.test(url);
 }
-
-export const isCampoValido = ({ campo, valor, tipoEsperado }) => {
-    if (valor === undefined || valor === null) throw new Error(`Undefined field: ${campo}`);
-    if (tipoEsperado == "url") {
-        if (isURL(valor) || valor == "") return { [campo]: valor };
-    }
-    if (valor.constructor.name.toLowerCase() !== tipoEsperado.toLowerCase()) throw new Error(`Field: ${campo} - Value: ${valor} Does NOT correspond to the type of data requested`);
-    return { [campo]: valor };
-}
