@@ -53,10 +53,12 @@ export const addElementClicked = async (btn) => {
 
 export const deleteAllCart = async () => {
     let cartAll = await cartModel.getAll();
-    await Promise.all(cartAll.forEach(async (c) => {
-        await cartModel.delOne(c.id);
-    }))
-    window.location.reload();
+    if (!cartAll.status) {
+        await Promise.all(cartAll.forEach(async (c) => {
+            await cartModel.delOne(c.id);
+        }))
+        window.location.reload();
+    }
 }
 
 export const deleteOneCart = async (btn) => {

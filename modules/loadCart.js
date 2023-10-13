@@ -5,20 +5,22 @@ import shirtModel from "../api/models/shirtModel.js"
 
 export const loadCart = async (grid) => {
     let cart = await cartModel.getAll();
-    let cartAll = await Promise.all(cart.map(async (e) => {
-        let product = {}
-        let productKey = Object.entries(e).filter((element) => element[0].includes("Id"))[0];
-        if (productKey[0] === "pantalonId") { product = { ...await pantModel.getOne(Number(productKey[1])) } }
-        if (productKey[0] === "abrigoId") { product = { ...await coatModel.getOne(Number(productKey[1])) } }
-        if (productKey[0] === "camisetaId") { product = { ...await shirtModel.getOne(Number(productKey[1])) } }
-        return { ...e, product };
-    }))
+    if (!cart.status) {
+        let cartAll = await Promise.all(cart.map(async (e) => {
+            let product = {}
+            let productKey = Object.entries(e).filter((element) => element[0].includes("Id"))[0];
+            if (productKey[0] === "pantalonId") { product = { ...await pantModel.getOne(Number(productKey[1])) } }
+            if (productKey[0] === "abrigoId") { product = { ...await coatModel.getOne(Number(productKey[1])) } }
+            if (productKey[0] === "camisetaId") { product = { ...await shirtModel.getOne(Number(productKey[1])) } }
+            return { ...e, product };
+        }))
 
-    cartAll.forEach((cart) => {
-        grid.insertAdjacentHTML("beforeend", /*html*/`
-        <product-cart-component img="${cart.product.imagen}" nameProduct="${cart.product.nombre}" quantity="${cart.cantidad}" price="${cart.product.precio}" idBtn="${cart.id}"></product-cart-component>
-        `)
-    })
+        cartAll.forEach((cart) => {
+            grid.insertAdjacentHTML("beforeend", /*html*/`
+            <product-cart-component img="${cart.product.imagen}" nameProduct="${cart.product.nombre}" quantity="${cart.cantidad}" price="${cart.product.precio}" idBtn="${cart.id}"></product-cart-component>
+            `)
+        })
+    }
 }
 
 // {
