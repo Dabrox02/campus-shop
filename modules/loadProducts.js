@@ -25,7 +25,7 @@ export const loadPants = async (grid) => {
     let pants = await pantModel.getAll();
     pants.forEach(c => {
         grid.insertAdjacentHTML("beforeend", /*html*/`
-        <product-component img="${c.imagen}" price="${c.precio}" nameProduct="${c.nombre}" idBtn="${c.id}" category="abrigo"></product-component>
+        <product-component img="${c.imagen}" price="${c.precio}" nameProduct="${c.nombre}" idBtn="${c.id}" category="pantalon"></product-component>
         `)
     });
 }
