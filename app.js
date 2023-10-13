@@ -1,6 +1,6 @@
-
 import { loadCoats, loadShirts, loadPants } from "./modules/loadProducts.js"
 import { loadCart } from "./modules/loadCart.js";
+import { addElementClicked } from "./modules/logicCart.js";
 
 const d = document;
 const $ = (e) => d.querySelector(e);
@@ -40,4 +40,13 @@ export const app = async () => {
             }
         })
     }
+
+
+    d.addEventListener("click", async (e) => {
+        if (e.target.matches("button[data-add]")) {
+            // console.log(e.target);
+            await addElementClicked(e.target);
+        }
+    })
+
 }
