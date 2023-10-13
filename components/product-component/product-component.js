@@ -22,7 +22,7 @@ export class ProductComponent extends HTMLElement {
                     <h4 class="card-price text-success">$ ${this.price}</h4>
                 </p>
                 <div>
-                    <button type="button" class="btn btn-primary btn-lg btn-block" data-add="${this.id_btn}" category="${this.category}">Agregar</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" data-add="${this.id_btn}" data-category="${this.category}">Agregar</button>
                 </div>
             </div>
         </div>
