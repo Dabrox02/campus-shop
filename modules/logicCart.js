@@ -49,3 +49,23 @@ export const addElementClicked = async (btn) => {
         swalAlert({ type: "error", title: "No se pudo agregar", time: "2000" });
     }
 }
+
+
+export const deleteAllCart = async () => {
+    let cartAll = await cartModel.getAll();
+    await Promise.all(cartAll.forEach(async (c) => {
+        await cartModel.delOne(c.id);
+    }))
+    window.location.reload();
+}
+
+export const deleteOneCart = async (btn) => {
+    let id = Number(btn.dataset.del);
+    let res = await cartModel.delOne(id);
+    if (res.status) {
+        swalAlert({ type: "error", title: "No se pudo eliminar del carrito", time: "2000" });
+    } else {
+        swalAlert({ type: "success", title: "Eliminado del carrito", time: "2000" });
+    }
+    window.location.reload();
+}
