@@ -85,3 +85,20 @@ export const editQuantity = async (btn) => {
     }
     window.location.reload();
 }
+
+export const getTotalCart = async () => {
+    let cart = await cartModel.getAll();
+    if (!cart.status) {
+        let cartAll = await Promise.all(cart.map(async (e) => {
+            let product = {}
+            let productKey = Object.entries(e).filter((element) => element[0].includes("Id"))[0];
+            if (productKey[0] === "pantalonId") { product = { ...await pantModel.getOne(Number(productKey[1])) } }
+            if (productKey[0] === "abrigoId") { product = { ...await coatModel.getOne(Number(productKey[1])) } }
+            if (productKey[0] === "camisetaId") { product = { ...await shirtModel.getOne(Number(productKey[1])) } }
+            return { ...e, product };
+        }))
+        let subtotal = cartAll.map((e) => Number(e.cantidad) * Number(e.product.precio));
+        return subtotal.reduce((ac, cr) => ac + cr);
+    }
+    return 0;
+}

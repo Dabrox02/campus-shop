@@ -1,6 +1,6 @@
 import { loadCoats, loadShirts, loadPants } from "./modules/loadProducts.js"
 import { loadCart } from "./modules/loadCart.js";
-import { addElementClicked, deleteOneCart, deleteAllCart, editQuantity } from "./modules/logicCart.js";
+import { addElementClicked, deleteOneCart, deleteAllCart, editQuantity, getTotalCart } from "./modules/logicCart.js";
 
 const d = document;
 const $ = (e) => d.querySelector(e);
@@ -33,7 +33,8 @@ export const app = async () => {
 
     if (path === "/views/carrito") {
         await loadCart($("#grid-products-cards"));
-
+        let total = await getTotalCart();
+        $("#text-total-products").textContent = `$ ${total}`;
         d.addEventListener("input", async (e) => {
             if (e.target.matches("input[data-id]")) {
                 if (!isNaN(Number(e.target.value)) && Number(e.target.value) >= 1) {
@@ -42,7 +43,6 @@ export const app = async () => {
             }
         })
     }
-
 
     d.addEventListener("click", async (e) => {
         if (e.target.matches("button[data-add]")) {
