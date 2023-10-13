@@ -1,5 +1,6 @@
 
 import { loadCoats, loadShirts, loadPants } from "./modules/loadProducts.js"
+import { loadCart } from "./modules/loadCart.js";
 
 const d = document;
 const $ = (e) => d.querySelector(e);
@@ -31,5 +32,12 @@ export const app = async () => {
     }
 
     if (path === "/views/carrito") {
+        await loadCart($("#grid-products-cards"));
+
+        d.addEventListener("input", (e) => {
+            if (e.target.matches("")) {
+
+            }
+        })
     }
 }
