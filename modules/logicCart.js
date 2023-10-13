@@ -71,3 +71,17 @@ export const deleteOneCart = async (btn) => {
     }
     window.location.reload();
 }
+
+export const editQuantity = async (btn) => {
+    let id = Number(btn.dataset.id);
+    let newValor = Number(btn.value);
+    let res = await cartModel.putOne({
+        id, cantidad: newValor
+    })
+    if (!res.status) {
+        swalAlert({ type: "success", title: "Nueva cantidad agregada", time: "2000" });
+    } else {
+        swalAlert({ type: "error", title: "No se pudo agregar la nueva cantidad", time: "2000" });
+    }
+    window.location.reload();
+}

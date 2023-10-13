@@ -7,7 +7,6 @@ export class ProductCartComponent extends HTMLElement {
         this.id_btn = this.getAttribute("idBtn") || "0";
         this.price = this.getAttribute("price") || "0";
         this.subtotal = Number(this.price) * Number(this.quantity) || 0;
-        this.category = "carrito";
     }
 
     render() {
@@ -28,7 +27,7 @@ export class ProductCartComponent extends HTMLElement {
                 <div class="col-md-2">
                     <div class="card-body">
                         <h4><small class="text-muted">Cantidad</small></h4>
-                        <input type="number" min="1" style="width:80%" value="${this.quantity}">
+                        <input type="number" min="1" style="width:80%" value="${this.quantity}" data-id="${this.id_btn}" class="edit-quantity">
                     </div>
                 </div>
                 <div class="col-md-2">
